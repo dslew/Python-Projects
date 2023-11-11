@@ -1,5 +1,6 @@
 ﻿#MAC Address Changer for Linux system
 #from Udemy course "Learn Python and Ethical Hacking From Scratch"
+#fleshed out with user input (if/else and MAC address input)
 
 #Quick run-down on the bash commands for manual config:
 #
