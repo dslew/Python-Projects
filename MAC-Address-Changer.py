@@ -13,17 +13,16 @@
 import subprocess
 
 subprocess.call("ifconfig", shell=True)
-usrSelection = input ("do you want to change you MAC address for eth0? y/n: ")
+
+interface = input("enter interface you wish to change: ")
+usrSelection = input ("do you want to change you MAC address for " + interface + " y/n: ")
 
 if usrSelection == "y":
-    subprocess.call("ifconfig eth0 down", shell=True)
+    subprocess.call("ifconfig " + interface + " down", shell=True)
     newMac = input ("enter new MAC address. format xx:xx:xx:xx:xx:xx: ")
-    subprocess.call("ifconfig eth0 hw ether" + newMac, shell=True)
-    subprocess.call("ifconfig eth0 up", shell=True)
+    subprocess.call("ifconfig " + interface + " hw ether " + newMac, shell=True)
+    subprocess.call("ifconfig " + interface + " up", shell=True)
     
 else:
     print("MAC address not changed")
     
-
-
-
