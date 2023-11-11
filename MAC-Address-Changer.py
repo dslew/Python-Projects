@@ -7,7 +7,7 @@
 #root@kali:~# ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx
 #root@kali:~# ifconfig eth0 up
 
-# not to self: subprocess allows execution of commands on native OS terminal
+# note to self: subprocess allows execution of commands on native OS terminal
 
 import subprocess
 
