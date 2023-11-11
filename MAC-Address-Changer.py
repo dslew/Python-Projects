@@ -9,21 +9,59 @@
 #root@kali:~# ifconfig eth0 up
 
 # note to self: subprocess allows execution of commands on native OS terminal
+# first attempt Linux
 
 import subprocess
 
 subprocess.call("ifconfig", shell=True)
-usrSelection = input ("do you want to change you MAC address for eth0? y/n: ")
+
+interface = input("enter interface you wish to change: ")
+usrSelection = input ("do you want to change you MAC address for " + interface + " y/n: ")
 
 if usrSelection == "y":
-    subprocess.call("ifconfig eth0 down", shell=True)
+    subprocess.call("ifconfig " + interface + " down", shell=True)
     newMac = input ("enter new MAC address. format xx:xx:xx:xx:xx:xx: ")
-    subprocess.call("ifconfig eth0 hw ether" + newMac, shell=True)
-    subprocess.call("ifconfig eth0 up", shell=True)
+    subprocess.call("ifconfig " + interface + " hw ether " + newMac, shell=True)
+    subprocess.call("ifconfig " + interface + " up", shell=True)
     
 else:
     print("MAC address not changed")
     
+# first attempt for windows (might work - currently have no test environment):
 
+import subprocess
 
+subprocess.run("powershell.exe -command Get-NetAdapter", shell=True)
+#subprocess.run("PowerShell.exe","Get-NetAdapter", shell=True)
+
+interface = input("enter interface you wish to change: ")
+usrSelection = input ("do you want to change you MAC address for " + interface + " y/n: ")
+
+if usrSelection == "y":
+    newMac = input ("enter new MAC address. format xx:xx:xx:xx:xx:xx: ")
+    psCommand1 = "Disable-NetAdapter -Name " + interface
+    psCommand2 = "Set-NetAdapter -Name " + interface + " -MacAddress " + newMac
+    psCommand3 = "Enable-NetAdapter -Name " + interface
+    subprocess.call("powershell.exe -command " + psCommand1 , shell=True)
+    subprocess.call("powershell.exe -command " + psCommand2 , shell=True)
+    subprocess.call("powershell.exe -command " + psCommand3 , shell=True)
+        
+else:
+    print("MAC address not changed")
+
+#Second attempt for Windows : running Powershell script through python
+#I've tried various ways, can't seem to get it to run just yet. I'll come back to this one at a later date
+#I can imagine something like this, piggybacking scripts through scripts, could be very important later on
+#
+#the PowerShell Script can be found in my PowerShell projects file
+#
+#PowerShell script that might work (currently have no test environment):
+#
+
+import subprocess
+
+psScript = "C:\Users\dslew\OneDrive\Documents\GitHub\PowerShell-Projects\Mac-Changer-PS.ps1"
+psCommand = "powershell.exe -file " + psScript 
+
+subprocess.run(psCommand, shell=True)
 
