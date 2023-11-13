@@ -26,8 +26,37 @@ if usrSelection == "y":
     
 else:
     print("MAC address not changed")
+
+#second attempt for Linux - using parsing, decisions and functions
+#sanitisation of user input is also included
+#!declaration! - this is not my own code!! in this case, for this attempt, i'm just running through the course content as practice.
+
+import subprocess
+import optparse
+
+def run_parser():
+    parser = optparse.OptionParser()
+    parser.add_option("-i", "--interface", dest="interface", help="Interface to change its MAC address")
+    parser.add_option("-m", "--mac", dest="newMac", help="New MAC address")
+    (options, arguments) = parser.parse_args()
+    if not options.interface:
+        parser.error("interface invalid, use --help for more information")
+    elif not options.newMac:
+        parser.error("MAC invalid, use --help for more information")
+    return options
+
+def set_mac(interface, newMac):
+    print("changing " + interface + " to " + newMac)
+    subprocess.call(["ifconfig", interface, "down"])
+    subprocess.call(["ifconfig", interface, "hw", "ether", newMac])
+    subprocess.call(["ifconfig", interface, "up"])
+
+options = run_parser()
+set_mac(options.interface, options.newMac)
+
+#!end!
     
-# first attempt for windows (might work - currently have no test environment):
+# first attempt for windows (might work - currently have no test environment - once i have a Windows VM i can destroy without consequence, i'll try it out.):
 
 import subprocess
 
