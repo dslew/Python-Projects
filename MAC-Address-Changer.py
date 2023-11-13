@@ -11,6 +11,8 @@
 # note to self: subprocess allows execution of commands on native OS terminal
 # first attempt Linux
 
+#!/usr/bin/env python
+
 import subprocess
 
 subprocess.call("ifconfig", shell=True)
@@ -30,6 +32,8 @@ else:
 #second attempt for Linux - using parsing, decisions and functions
 #sanitisation of user input is also included
 #!declaration! - this is not my own code!! in this case, for this attempt, i'm just running through the course content as practice.
+
+#!/usr/bin/env python
 
 import subprocess
 import optparse
@@ -80,7 +84,6 @@ else:
 
 #Second attempt for Windows : running Powershell script through python
 #I've tried various ways, can't seem to get it to run just yet. I'll come back to this one at a later date
-#I can imagine something like this, piggybacking scripts through scripts, could be very important later on
 #
 #the PowerShell Script can be found in my PowerShell projects file
 #
